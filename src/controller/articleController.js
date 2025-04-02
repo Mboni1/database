@@ -1,4 +1,4 @@
-const articles = []
+let articles = []
 
 const ArticleController = {
     getAllArticles: (req, res) => {
