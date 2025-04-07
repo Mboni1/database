@@ -9,37 +9,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model Author {
-  id        Int   @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String    @unique
   bio       String?
   articles  Article[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model Category {
-  id        Int   @id @default(autoincrement())
-  name      String   @unique
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
   articles  Article[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model Article {
-  id         Int   @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   title      String
   content    String
-  published  Boolean  @default(false)
-  author     Author   @relation(fields: [authorId], references: [id])
+  published  Boolean   @default(false)
+  author     Author    @relation(fields: [authorId], references: [id])
   authorId   Int
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category  @relation(fields: [categoryId], references: [id])
   categoryId Int
   comments   Comment[]
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
 }
 
 model Comment {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   content   String
   article   Article  @relation(fields: [articleId], references: [id])
   articleId Int
